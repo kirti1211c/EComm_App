@@ -1,11 +1,19 @@
-class Validator {
+class TValidator {
+  /// Empty Text Validation
+  static String? validateEmptyText(String? fieldName, String? value) {
+    if (value == null || value.isEmpty) {
+      return '$fieldName is required.';
+    }
+    return null;
+  }
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email is required.';
     }
 
     // Regular expression for email validation
-    final emailRegExp = RegExp(r'^[\w-\. ]+@([\w-]+\.)+[\w-]{2,4}$');
+    final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
     if (!emailRegExp.hasMatch(value)) {
       return 'Invalid email address.';
@@ -34,7 +42,7 @@ class Validator {
     }
 
     // Check for special characters
-    if (!value.contains(RegExp(r'[!@#$%^&*(),?":(<>]'))) {
+    if (!value.contains(RegExp(r'[!@#$%^&*(),?":{}<>]'))) {
       return 'Password must contain at least one special character.';
     }
     return null;

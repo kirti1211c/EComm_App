@@ -13,6 +13,7 @@ class TImages {
   static const String onboarding2 = "assets/images/on_boarding_images/payment.gif";
   static const String onboarding3 = "assets/images/on_boarding_images/deliver.gif";
 
+
   //Animations
   static const String productsIllustration = "assets/images/animations/sammy-line-workout.gif";
   static const String productsSaleIllustration = "assets/images/animations/sammy-line-sale.png";
@@ -20,6 +21,7 @@ class TImages {
   static const String deliveredInPlaneIllustration = "assets/images/animations/sammy-line-come-back-later.png";
   static const String deliveredEmailIllustration = "assets/images/animations/emailDeliver.png";
   static const String verifyIllustration = "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
+  static const String docerAnimation = "assets/images/animations/processing.gif";
 
   //Category Items
   static const String sportIcon = "assets/icons/categories/icons8-bowling-64.png";
