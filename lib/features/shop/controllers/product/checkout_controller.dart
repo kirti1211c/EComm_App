@@ -34,13 +34,13 @@ class CheckoutController extends GetxController{
               TPaymentTile(paymentMethod: PaymentMethodModel (name: 'Paypal', image: TImages.paypal)),
               const SizedBox(height: TSizes.spaceBtwItems/2),
 
-              TPaymentTile(paymentMethod: PaymentMethodModel (name: 'Google Pay', image: TImages.paypal)),
+              TPaymentTile(paymentMethod: PaymentMethodModel (name: 'Google Pay', image: TImages.googlePay)),
               const SizedBox(height: TSizes.spaceBtwItems/2),
 
-              TPaymentTile(paymentMethod: PaymentMethodModel (name: 'Credit/Debit Card', image: TImages.paypal)),
+              TPaymentTile(paymentMethod: PaymentMethodModel (name: 'Credit/Debit Card', image: TImages.cardPayment)),
               const SizedBox(height: TSizes.spaceBtwItems/2),
 
-              TPaymentTile(paymentMethod: PaymentMethodModel (name: 'NetBanking', image: TImages.paypal)),
+              TPaymentTile(paymentMethod: PaymentMethodModel (name: 'NetBanking', image: TImages.netBanking)),
               const SizedBox(height: TSizes.spaceBtwItems/2),
 
               const SizedBox(height: TSizes.spaceBtwSections),

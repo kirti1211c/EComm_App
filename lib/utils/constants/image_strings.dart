@@ -45,18 +45,15 @@ class TImages {
 
   //Payment Method
 
-  static const String applePay = "assets/icons/payment_methods/app";
-  static const String googlePay = "assets/icons/payment_methods/go";
-  static const String creditCard = "assets/icons/payment_methods/";
-  static const String masterCard = "assets/icons/payment_methods/";
-  static const String paypal = "assets/icons/payment_methods/shoes.png";
-  static const String visa = "assets/icons/payment_methods/visa.pn";
-  static const String paystack = "assets/icons/payment_methods/pay";
-  static const String paytm = "assets/icons/payment_methods/paytm.";
+
+  static const String googlePay = "assets/logos/google_pay.png";
+  static const String cardPayment = "assets/logos/card_payment.jpg";
+  static const String paypal = "assets/logos/paypal.png";
+  static const String netBanking = "assets/logos/netBanking.png";
 
 
-  static const String successfulPaymentIcon = "";
-  static const String noOrder = "";
+
+  static const String successfulPaymentIcon = "assets/images/payment_success.jpg";
 
   //Profile
   static const String user = "assets/images/user/user.png";
