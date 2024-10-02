@@ -1,5 +1,6 @@
 import 'package:ecomm/features/authentication/screens/signup/verify_email.dart';
 import 'package:ecomm/navigation_menu.dart';
+import 'package:ecomm/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,7 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
 
   ///Get Authenticated User Data
-  User? get authUser => _auth.currentUser;
+  User get authUser => _auth.currentUser!;
 
   /// Called from main.dart on app launch
   @override
@@ -37,6 +38,9 @@ class AuthenticationRepository extends GetxController {
     final user = _auth.currentUser;
     if(user != null){
       if(user.emailVerified){
+
+        await TLocalStorage.init(user.uid);
+
         Get.offAll(()=> const NavigationMenu());
       }else{
         Get.offAll(()=>  VerifyEmailScreen(email: _auth.currentUser?.email,));

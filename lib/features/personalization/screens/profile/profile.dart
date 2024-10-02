@@ -5,7 +5,7 @@ import 'package:ecomm/features/personalization/screens/profile/widgets/change_na
 import 'package:ecomm/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:ecomm/utils/constants/image_strings.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
-import 'package:ecomm/utils/popups/shimmer.dart';
+import 'package:ecomm/common/widgets/shimmers/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

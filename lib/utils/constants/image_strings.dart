@@ -22,6 +22,7 @@ class TImages {
   static const String deliveredEmailIllustration = "assets/images/animations/emailDeliver.png";
   static const String verifyIllustration = "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
   static const String docerAnimation = "assets/images/animations/processing.gif";
+  static const String nothing = "assets/images/nothing.png";
 
   //Category Items
   static const String sportIcon = "assets/icons/categories/icons8-bowling-64.png";
@@ -52,7 +53,10 @@ class TImages {
   static const String visa = "assets/icons/payment_methods/visa.pn";
   static const String paystack = "assets/icons/payment_methods/pay";
   static const String paytm = "assets/icons/payment_methods/paytm.";
-  static const String successfulPaymentIcon = "assets/icons/paymen";
+
+
+  static const String successfulPaymentIcon = "";
+  static const String noOrder = "";
 
   //Profile
   static const String user = "assets/images/user/user.png";

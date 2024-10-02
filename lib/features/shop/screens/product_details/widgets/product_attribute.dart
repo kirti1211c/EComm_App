@@ -3,115 +3,123 @@ import 'package:ecomm/common/widgets/custom_shapes/conatiners/rounded_conatiner.
 import 'package:ecomm/common/widgets/texts/product_price_text.dart';
 import 'package:ecomm/common/widgets/texts/product_title_text.dart';
 import 'package:ecomm/common/widgets/texts/section_heading.dart';
+import 'package:ecomm/data/repositories/authentication/authentication_repository.dart';
+import 'package:ecomm/features/shop/controllers/product/variation_controller.dart';
 import 'package:ecomm/utils/constants/colors.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ProductAttributes extends StatelessWidget {
-  const ProductAttributes({super.key});
+import '../../../models/product_model.dart';
+
+class TProductAttributes extends StatelessWidget {
+  const TProductAttributes({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    return Column(
-      children: [
-        TRoundedContainer(
-          padding: const EdgeInsets.all(TSizes.md),
-          backgroundColor: dark ? TColors.darkerGrey : TColors.grey,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  const TSectionHeading(
-                    title: "Variation",
-                    showActionButton: false,
-                  ),
-                  const SizedBox(
-                    width: TSizes.spaceBtwItems,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
+    final controller = Get.put(VariationController());
+    return Obx(
+      () => Column(
+        children: [
+          if(controller.selectedVariation.value.id.isNotEmpty)
+            TRoundedContainer(
+            padding: const EdgeInsets.all(TSizes.md),
+            backgroundColor: dark ? TColors.darkerGrey : TColors.grey,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const TSectionHeading(
+                      title: "Variation",
+                      showActionButton: false,
+                    ),
+                    const SizedBox(
+                      width: TSizes.spaceBtwItems,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const TProductTitleText(
+                              title: "Price : ",
+                              smallSize: true,
+                            ),
+                            if(controller.selectedVariation.value.salePrice > 0)
+                            Text(
+                              '\$${controller.selectedVariation.value.price}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .apply(decoration: TextDecoration.lineThrough),
+                            ),
+                            const SizedBox(
+                              width: TSizes.spaceBtwItems,
+                            ),
+                            TProductPriceText(price: controller.getVariationPrice()),
+                          ],
+                        ),
+                        Row(children: [
                           const TProductTitleText(
-                            title: "Price : ",
+                            title: "Stock : ",
                             smallSize: true,
                           ),
                           Text(
-                            '\$25',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .apply(decoration: TextDecoration.lineThrough),
+                            controller.variationStockStatus.value,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const SizedBox(
                             width: TSizes.spaceBtwItems,
                           ),
-                          const TProductPriceText(price: "20"),
-                        ],
-                      ),
-                      Row(children: [
-                        const TProductTitleText(
-                          title: "Stock : ",
-                          smallSize: true,
-                        ),
-                        Text(
-                          'In Stock',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(
-                          width: TSizes.spaceBtwItems,
-                        ),
-                      ]),
-                    ],
-                  )
-                ],
-              ),
-              const TProductTitleText(
-                title:
-                    "This is the Description of the product and it can go upto max 4 lines.",
-                smallSize: true,
-                maxLines: 4,
-              ),
-            ],
+                        ]),
+                      ],
+                    )
+                  ],
+                ),
+                 TProductTitleText(
+                  title: controller.selectedVariation.value.description ?? '',
+                  smallSize: true,
+                  maxLines: 4,
+                ),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(
-          height: TSizes.spaceBtwItems,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const TSectionHeading(title: "Colors",showActionButton: false,),
-            const SizedBox(height: TSizes.spaceBtwItems / 2,),
-            Wrap(
-              spacing: 8,
+          const SizedBox(
+            height: TSizes.spaceBtwItems,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: product.productAttributes!.map((attribute) =>Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TChoiceChip(text: "Green", selected: true, onSelected: (value){},),
-                TChoiceChip(text: "Blue", selected: false, onSelected: (value){}),
-                TChoiceChip(text: "Yellow", selected: false, onSelected: (value){}),
+                TSectionHeading(title: attribute.name ?? '',showActionButton: false,),
+                const SizedBox(height: TSizes.spaceBtwItems / 2,),
+                Obx(
+                  ()=> Wrap(
+                    spacing: 8,
+                    children: attribute.values!.map((attributeValue){
+                      final isSelected = controller.selectedAttributes[attribute.name] == attributeValue;
+                      final available = controller
+                          .getAttributesAvailabilityInVariation(product.productVariations!, attribute.name!)
+                          .contains(attributeValue);
+                      return TChoiceChip(text: attributeValue, selected: isSelected, onSelected: available? (selected){
+                        if (selected && available) {
+                          controller.onAttributeSelected(product, attribute.name ?? '', attributeValue);
+                        }
+                      } :null);
+                    }).toList(),
+                  ),
+                ),
               ],
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const TSectionHeading(title: "Size", showActionButton: false,),
-            const SizedBox(height: TSizes.spaceBtwItems / 2,),
-            Wrap(
-              spacing: 8,
-              children: [
-                TChoiceChip(text: "EU 34", selected: true,  onSelected: (value){},),
-                TChoiceChip(text: "EU 36", selected: false,  onSelected: (value){},),
-                TChoiceChip(text: "EU 38", selected: false,  onSelected: (value){},),
-              ],
-            ),
-          ],
-        )
-      ],
+            )).toList(),
+          ),
+      
+        ],
+      ),
     );
   }
 }

@@ -22,6 +22,7 @@ class TAnimationLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +38,7 @@ class TAnimationLoaderWidget extends StatelessWidget {
           const SizedBox(height: TSizes.defaultSpace),
           Text(
             text,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium!,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: TSizes.defaultSpace),
@@ -48,7 +49,7 @@ class TAnimationLoaderWidget extends StatelessWidget {
                   onPressed: onActionPressed,
                   child: Text(
                     actionText!,
-                    style: Theme.of(context).textTheme.bodyMedium!.apply(color: TColors.light),
+                    style: Theme.of(context).textTheme.bodyMedium!.apply(color: dark ? TColors.white : TColors.black),
                   )
               ),
             )

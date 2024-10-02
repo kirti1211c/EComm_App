@@ -6,7 +6,7 @@ import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/products/cart/cart_menu_icon.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/text_strings.dart';
-import '../../../../../utils/popups/shimmer.dart';
+import '../../../../../common/widgets/shimmers/shimmer.dart';
 
 class THomeAppBar extends StatelessWidget {
   const THomeAppBar({
@@ -31,8 +31,8 @@ class THomeAppBar extends StatelessWidget {
           )
         ],
       ),
-      actions: [
-        TCartCounterIcon(onPressed: (){}, iconColor: TColors.white,),
+      actions: const [
+        TCartCounterIcon( iconColor: TColors.white,),
       ],
     );
   }
